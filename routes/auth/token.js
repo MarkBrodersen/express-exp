@@ -1,4 +1,4 @@
-import useDB from "../../database.js";
+import User from "../../modals/user.model.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
@@ -11,11 +11,8 @@ export default async function token(request, response) {
     return;
   }
 
-  const { collection, client } = await useDB("users");
-
   try {
-    const user = await collection.findOne({ username: request.body.username });
-    client.close();
+    const user = await User.findOne({ username: request.body.username });
     if (!user) {
       response.status(403);
       response.end();

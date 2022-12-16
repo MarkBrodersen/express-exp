@@ -1,15 +1,13 @@
-import { MongoClient } from "mongodb";
+//  import { MongoClient } from "mongodb";
+import mongoose from "mongoose";
 import dotenv from "dotenv";
 dotenv.config();
 
 const uri = process.env.MONGO_URI;
-const client = new MongoClient(uri);
 
-export default async function useDB(collectionName) {
-  await client.connect();
-
-  const db = client.db("Ostebiks");
-  const collection = db.collection(collectionName);
-
-  return { collection, client };
+async function main() {
+  await mongoose.connect(uri);
+  console.log("DB Connection established");
 }
+
+main().catch((error) => console.log("DB Connection error", error));

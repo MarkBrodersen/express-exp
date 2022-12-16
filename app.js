@@ -2,6 +2,7 @@ import express from "express";
 import cheeses from "./routes/cheeses/index.js";
 import users from "./routes/users/index.js";
 import auth from "./routes/auth/index.js";
+import "./database.js";
 
 const app = express();
 

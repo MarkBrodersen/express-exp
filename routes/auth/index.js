@@ -1,5 +1,5 @@
 import token from "./token.js";
 
 export default function auth(app) {
-  app.route("/auth/token").post(token);
+  app.route("/api/v1/auth/token").post(token);
 }

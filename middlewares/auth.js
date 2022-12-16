@@ -3,14 +3,12 @@ import dotenv from "dotenv";
 dotenv.config();
 
 export default function authorization(request, response, next) {
-  // tjek om der er en authorization headers
   if (!request.headers.authorization) {
     response.status(401);
     response.end();
     return;
   }
 
-  // tjek om authorization headeren er formateret korrekt, fx "Bearer fa98ep9p498pv9np4t"
   const header = request.headers.authorization.split(" ");
   if (header.length !== 2 && header[0].toLowerCase() !== "bearer") {
     response.status(403);
@@ -18,7 +16,6 @@ export default function authorization(request, response, next) {
     return;
   }
 
-  // tjek om token er gyldigt
   try {
     jwt.verify(header[1], process.env.TOKEN_SECRET);
     next();
